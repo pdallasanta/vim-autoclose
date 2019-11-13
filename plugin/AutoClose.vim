@@ -439,12 +439,12 @@ function! s:CreatePairsMaps()
                     \ . closer . " <Esc>`>a" . closer .  "<Esc>`<i" . opener . "<Esc>"
         if key == b:AutoClosePairs[key]
             exec "inoremap <buffer> <silent> " . opener
-                        \ . " <C-R>=<SID>OpenOrCloseTwinPair(" . quoted_opener . ")<CR>"
+                        \ . " <C-]><C-R>=<SID>OpenOrCloseTwinPair(" . quoted_opener . ")<CR>"
         else
             exec "inoremap <buffer> <silent> " . opener
-                        \ . " <C-R>=<SID>InsertPair(" . quoted_opener . ")<CR>"
+                        \ . " <C-]><C-R>=<SID>InsertPair(" . quoted_opener . ")<CR>"
             exec "inoremap <buffer> <silent> " . closer
-                        \ . " <C-R>=<SID>ClosePair(" . quoted_closer . ")<CR>"
+                        \ . " <C-]><C-R>=<SID>ClosePair(" . quoted_closer . ")<CR>"
         endif
     endfor
 endfunction
@@ -454,7 +454,8 @@ function! s:CreateExtraMaps()
     inoremap <buffer> <silent> <BS>         <C-R>=<SID>Backspace()<CR>
     inoremap <buffer> <silent> <Del>        <C-R>=<SID>Delete()<CR>
     if b:AutoCloseExpandSpace
-        inoremap <buffer> <silent> <Space>      <C-R>=<SID>Space()<CR>
+        "inoremap <buffer> <silent> <Space>      <C-R>=<SID>Space()<CR>
+        inoremap <buffer> <silent> <Space>  <C-]><C-R>=<SID>Space()<CR>
     endif
     if len(b:AutoCloseExpandEnterOn) > 0
         inoremap <buffer> <silent> <CR>      <C-R>=<SID>Enter()<CR>
